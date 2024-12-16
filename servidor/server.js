@@ -5,61 +5,61 @@ const cors = require('cors');
 app.use(express.json());
 app.use(cors());
 
-let usuarios = [];
+let jogos = [];
 
-app.post('/usuarios', (req, res) => {
+app.post('/jogos', (req, res) => {
     const { nome, email } = req.body;
     
     if (!nome || !email) {
         return res.status(400).json({ erro: 'Nome e email são obrigatórios' });
     }
 
-    const novoUsuario = { id: usuarios.length + 1, nome, email };
-    usuarios.push(novoUsuario);
+    const novoJogo = { id: jogos.length + 1, nome, email };
+    jogos.push(novoJogo);
     
     res.status(201).json(novoUsuario);
 });
 
-app.get('/usuarios', (req, res) => {
-    res.status(200).json(usuarios);
+app.get('/jogos', (req, res) => {
+    res.status(200).json(jogos);
 });
 
-app.get('/usuarios/:id', (req, res) => {
+app.get('/jogos/:id', (req, res) => {
     const { id } = req.params;
-    const usuario = usuarios.find(u => u.id === parseInt(id));
+    const jogo = jogos.find(u => u.id === parseInt(id));
     
-    if (!usuario) {
-        return res.status(404).json({ erro: 'Usuário não encontrado' });
+    if (!jogos) {
+        return res.status(404).json({ erro: 'Jogo não encontrado' });
     }
     
     res.status(200).json(usuario);
 });
 
-app.put('/usuarios/:id', (req, res) => {
+app.put('/jogos/:id', (req, res) => {
     const { id } = req.params;
     const { nome, email } = req.body;
     
-    const usuario = usuarios.find(u => u.id === parseInt(id));
+    const jogo = jogo.find(u => u.id === parseInt(id));
     
-    if (!usuario) {
+    if (!jogo) {
         return res.status(404).json({ erro: 'Usuário não encontrado' });
     }
     
-    usuario.nome = nome || usuario.nome;
-    usuario.email = email || usuario.email;
+    jogo.nome = nome || jogo.nome;
+    jogo.email = email || jogo.email;
     
-    res.status(200).json(usuario);
+    res.status(200).json(jogo);
 });
 
-app.delete('/usuarios/:id', (req, res) => {
+app.delete('/jogos/:id', (req, res) => {
     const { id } = req.params;
-    const index = usuarios.findIndex(u => u.id === parseInt(id));
+    const index = jogos.findIndex(u => u.id === parseInt(id));
     
     if (index === -1) {
         return res.status(404).json({ erro: 'Usuário não encontrado' });
     }
     
-    usuarios.splice(index, 1);
+    jogos.splice(index, 1);
     res.status(204).send();
 });
 
