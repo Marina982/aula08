@@ -9,7 +9,7 @@ let jogos = [];
 
 app.post('/jogos', (req, res) => {
     const { nome, email } = req.body;
-    
+    a
     if (!nome || !email) {
         return res.status(400).json({ erro: 'Nome e email são obrigatórios' });
     }
@@ -17,7 +17,7 @@ app.post('/jogos', (req, res) => {
     const novoJogo = { id: jogos.length + 1, nome, email };
     jogos.push(novoJogo);
     
-    res.status(201).json(novoUsuario);
+    res.status(201).json(novoJogo);
 });
 
 app.get('/jogos', (req, res) => {
@@ -32,7 +32,7 @@ app.get('/jogos/:id', (req, res) => {
         return res.status(404).json({ erro: 'Jogo não encontrado' });
     }
     
-    res.status(200).json(usuario);
+    res.status(200).json(jogo);
 });
 
 app.put('/jogos/:id', (req, res) => {

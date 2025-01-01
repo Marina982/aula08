@@ -15,7 +15,7 @@ export default function Registrar() {
     const registrar = async (event) => {
       event.preventDefault();
 try{
-    const resposta = await fetch('http://localhost:3000/usuarios',{
+    const resposta = await fetch("http://localhost:3000/jogos",{
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
