@@ -8,13 +8,13 @@ app.use(cors());
 let jogos = [];
 
 app.post('/jogos', (req, res) => {
-    const { nome, email } = req.body;
-    a
+    const { nome, email, idade, cpf, endereco, pais, idioma } = req.body;
+    
     if (!nome || !email) {
         return res.status(400).json({ erro: 'Nome e email são obrigatórios' });
     }
 
-    const novoJogo = { id: jogos.length + 1, nome, email };
+    const novoJogo = { id: jogos.length + 1, nome, email, idade, cpf, endereco, pais, idioma };
     jogos.push(novoJogo);
     
     res.status(201).json(novoJogo);
@@ -28,7 +28,7 @@ app.get('/jogos/:id', (req, res) => {
     const { id } = req.params;
     const jogo = jogos.find(u => u.id === parseInt(id));
     
-    if (!jogos) {
+    if (!jogo) {
         return res.status(404).json({ erro: 'Jogo não encontrado' });
     }
     
@@ -37,16 +37,21 @@ app.get('/jogos/:id', (req, res) => {
 
 app.put('/jogos/:id', (req, res) => {
     const { id } = req.params;
-    const { nome, email } = req.body;
+    const { nome, email, idade, cpf, endereco, pais, idioma } = req.body;
     
-    const jogo = jogo.find(u => u.id === parseInt(id));
+    const jogo = jogos.find(u => u.id === parseInt(id));
     
     if (!jogo) {
-        return res.status(404).json({ erro: 'Usuário não encontrado' });
+        return res.status(404).json({ erro: 'Jogo não encontrado' });
     }
     
     jogo.nome = nome || jogo.nome;
     jogo.email = email || jogo.email;
+    jogo.idade = idade || jogo.idade;
+    jogo.cpf = cpf || jogo.cpf;
+    jogo.endereco = endereco || jogo.endereco;
+    jogo.pais = pais || jogo.pais;
+    jogo.idioma = idioma || jogo.idioma;
     
     res.status(200).json(jogo);
 });
@@ -56,13 +61,13 @@ app.delete('/jogos/:id', (req, res) => {
     const index = jogos.findIndex(u => u.id === parseInt(id));
     
     if (index === -1) {
-        return res.status(404).json({ erro: 'Usuário não encontrado' });
+        return res.status(404).json({ erro: 'Jogo não encontrado' });
     }
     
     jogos.splice(index, 1);
     res.status(204).send();
 });
 
-app.listen(3000, () => {
-    console.log('Servidor rodando na porta 3000');
+app.listen(3001, () => {
+    console.log('Servidor rodando na porta 3001');
 });

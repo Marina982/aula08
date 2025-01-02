@@ -12,11 +12,17 @@ body {
     color: white;
     background-color: rgb(0, 0, 0);
     font-size: 20px;
-    display: flex; /* Flexbox layout */
-    justify-content: flex-start; /* Alinhamento à esquerda */
-    align-items: center; /* Alinhamento central vertical */
+    display: flex; 
+    justify-content: flex-start; 
+    align-items: center; 
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-decoration: none;
-    padding: 0 20px; /* Espaçamento interno */
-    box-sizing: border-box; /* Inclusão de padding e borda na largura e altura */
+    padding: 0 20px; 
+    box-sizing: border-box; 
+}
+
+.title{
+    margin: 0 ;
+    color: white;
+    align-self: center;
 }

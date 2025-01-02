@@ -13,7 +13,7 @@ export default function Home() {
   useEffect(() => {
     const buscaJogos = async () => {
       try {
-        const resposta = await fetch("http://localhost:3000/jogos");
+        const resposta = await fetch("http://localhost:3001/jogos");
         const dados = await resposta.json();
         setJogos(dados);
       } catch {
@@ -25,7 +25,7 @@ export default function Home() {
 
   const deletar = async (id) => {
     try {
-      await fetch("http://localhost:3000/jogos/" + id, {
+      await fetch("http://localhost:3001/jogos/" + id, {
         method: 'DELETE'
       });
       setJogos(jogos.filter(jogo => jogo.id !== id));
@@ -40,12 +40,17 @@ export default function Home() {
     const table = jogos.map(jogo => [
       jogo.id,
       jogo.nome,
-      jogo.email
+      jogo.email,
+      jogo.idade,
+      jogo.cpf,
+      jogo.endereco,
+      jogo.pais,
+      jogo.idioma
     ]);
 
     doc.text("Lista de usuarios", 10, 10);
     doc.autoTable({
-      head: [["id", "Nome", "E-mail"]],
+      head: [["ID", "Nome", "E-mail", "Idade", "CPF", "Endereço", "País", "Idioma"]],
       body: table
     });
 
@@ -55,13 +60,21 @@ export default function Home() {
   return (
     <div>
       <Header className={styles.header} />
-      <Button variant="contained" onClick={() => exportPDF()}>Gerar PDF</Button>
+      <Button variant="contained" onClick={() => exportPDF()} style={{ margin: '10px' }}>Gerar PDF</Button>
+      <Link to="/registrar">
+        <Button variant="contained" color="primary" style={{ margin: '10px' }}>Registrar</Button>
+      </Link>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
               <TableCell>Nome</TableCell>
               <TableCell>E-mail</TableCell>
+              <TableCell>Idade</TableCell>
+              <TableCell>CPF</TableCell>
+              <TableCell>Endereço</TableCell>
+              <TableCell>País</TableCell>
+              <TableCell>Idioma</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -69,6 +82,11 @@ export default function Home() {
               <TableRow key={jogo.id}>
                 <TableCell>{jogo.nome}</TableCell>
                 <TableCell>{jogo.email}</TableCell>
+                <TableCell>{jogo.idade}</TableCell>
+                <TableCell>{jogo.cpf}</TableCell>
+                <TableCell>{jogo.endereco}</TableCell>
+                <TableCell>{jogo.pais}</TableCell>
+                <TableCell>{jogo.idioma}</TableCell>
                 <TableCell>
                   <Button variant="contained" color="secondary" onClick={() => deletar(jogo.id)}>Remover</Button>
                   <Link to={'/Alterar/' + jogo.id}>
