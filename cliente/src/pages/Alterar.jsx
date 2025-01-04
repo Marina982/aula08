@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import styles from '../styles/Form.module.css';
 
-export default function Alterar() {
+export default function Formulario() {
   const { id } = useParams();
-  const [jogos, setJogos] = useState({
+  const isEdit = !!id;
+  const [dados, setDados] = useState({
     nome: '',
     email: '',
     idade: '',
@@ -14,111 +15,106 @@ export default function Alterar() {
     pais: '',
     idioma: ''
   });
-  
-  const [nome, setNome] = useState('');
-  const [email, setEmail] = useState('');
-  const [idade, setIdade] = useState('');
-  const [cpf, setCpf] = useState('');
-  const [endereco, setEndereco] = useState('');
-  const [pais, setPais] = useState('');
-  const [idioma, setIdioma] = useState('');
 
   useEffect(() => {
-    const buscaJogos = async () => {
-      try {
-        const resposta = await fetch(`http://localhost:3001/jogos/${id}`);
-        const dados = await resposta.json();
-        setJogos(dados);
-        setNome(dados.nome);
-        setEmail(dados.email);
-        setIdade(dados.idade);
-        setCpf(dados.cpf);
-        setEndereco(dados.endereco);
-        setPais(dados.pais);
-        setIdioma(dados.idioma);
-      } catch (err) {
-        console.error('Ocorreu um erro no app:', err);
-        alert('Ocorreu um erro no app!');
-      }
-    };
-    buscaJogos();
-  }, [id]);
+    if (isEdit) {
+      const buscaDados = async () => {
+        try {
+          const resposta = await fetch(`http://localhost:3001/jogos/${id}`);
+          const dados = await resposta.json();
+          setDados(dados);
+        } catch (err) {
+          console.error('Ocorreu um erro no app:', err);
+          alert('Ocorreu um erro no app!');
+        }
+      };
+      buscaDados();
+    }
+  }, [id, isEdit]);
 
-  const alterar = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const resposta = await fetch(`http://localhost:3001/jogos/${id}`, {
-        method: 'PUT',
+      const url = isEdit ? `http://localhost:3001/jogos/${id}` : 'http://localhost:3001/jogos';
+      const method = isEdit ? 'PUT' : 'POST';
+      const resposta = await fetch(url, {
+        method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          nome,
-          email,
-          idade,
-          cpf,
-          endereco,
-          pais,
-          idioma
-        })
+        body: JSON.stringify(dados)
       });
       if (!resposta.ok) {
-        alert("Erro ao alterar");
+        alert("Erro ao enviar dados");
+      } else {
+        const attDados = await resposta.json();
+        setDados(attDados);
+        alert("Dados enviados com sucesso");
       }
-      const attDados = await resposta.json();
-      setJogos(attDados);
-      alert("Dados atualizados");
     } catch (err) {
-      alert('Ocorreu um erro ao atualizar.');
+      alert('Ocorreu um erro ao enviar os dados.');
     }
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setDados({ ...dados, [name]: value });
   };
 
   return (
     <div>
       <Header className={styles.header} />
+      
       <main className={styles.main}>
-        <form onSubmit={alterar} className={styles.form}>
+        <form onSubmit={handleSubmit} className={styles.form}>
           <input
             type="text"
-            value={nome}
+            name="nome"
+            value={dados.nome}
             placeholder="Nome"
-            onChange={(event) => setNome(event.target.value)}
+            onChange={handleChange}
           />
           <input
             type="email"
-            value={email}
+            name="email"
+            value={dados.email}
             placeholder="Email"
-            onChange={(event) => setEmail(event.target.value)}
+            onChange={handleChange}
           />
           <input
             type="text"
-            value={idade}
+            name="idade"
+            value={dados.idade}
             placeholder="Idade"
-            onChange={(event) => setIdade(event.target.value)}
+            onChange={handleChange}
           />
           <input
             type="text"
-            value={cpf}
+            name="cpf"
+            value={dados.cpf}
             placeholder="CPF"
-            onChange={(event) => setCpf(event.target.value)}
+            onChange={handleChange}
           />
           <input
             type="text"
-            value={endereco}
+            name="endereco"
+            value={dados.endereco}
             placeholder="Endereço"
-            onChange={(event) => setEndereco(event.target.value)}
+            onChange={handleChange}
           />
           <input
             type="text"
-            value={pais}
+            name="pais"
+            value={dados.pais}
             placeholder="País"
-            onChange={(event) => setPais(event.target.value)}
+            onChange={handleChange}
           />
           <input
             type="text"
-            value={idioma}
+            name="idioma"
+            value={dados.idioma}
             placeholder="Idioma"
-            onChange={(event) => setIdioma(event.target.value)}
+            onChange={handleChange}
           />
-          <button type="submit">Atualizar dados</button>
+          <button type="submit">{isEdit ? 'Atualizar Dados' : 'Registrar'}</button>
         </form>
       </main>
     </div>

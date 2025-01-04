@@ -6,7 +6,7 @@ body {
     box-sizing: border-box;
 }
 
-.header {
+.footer {
     height: 90px;
     width: 100%; 
     color: white;
@@ -20,23 +20,3 @@ body {
     padding: 0 20px; 
     box-sizing: border-box; 
 }
-
-.title{
-    margin: 0 ;
-    color: white;
-    align-self: center;
-}
-
-.header {
-    display: flex;
-    align-items: flex-start;
-    padding: 10px;
-    background-color: #f4f4f4; 
-  }
-  
-  .logo {
-    max-width: 70px; /* ajuste o tamanho conforme necessário */
-    height: auto;
-    margin-left: 8px;
-  }
-  

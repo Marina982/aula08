@@ -62,7 +62,7 @@ export default function Home() {
       <Header className={styles.header} />
       <Button variant="contained" onClick={() => exportPDF()} style={{ margin: '10px' }}>Gerar PDF</Button>
       <Link to="/registrar">
-        <Button variant="contained" color="primary" style={{ margin: '10px' }}>Registrar</Button>
+        <Button variant="contained" color="" style={{ margin: '10px' }}>Registrar</Button>
       </Link>
       <TableContainer component={Paper}>
         <Table>
@@ -88,7 +88,7 @@ export default function Home() {
                 <TableCell>{jogo.pais}</TableCell>
                 <TableCell>{jogo.idioma}</TableCell>
                 <TableCell>
-                  <Button variant="contained" color="secondary" onClick={() => deletar(jogo.id)}>Remover</Button>
+                  <Button variant="contained" color="primary" onClick={() => deletar(jogo.id)}>Remover</Button>
                   <Link to={'/Alterar/' + jogo.id}>
                     <Button variant="contained">Alterar</Button>
                   </Link>

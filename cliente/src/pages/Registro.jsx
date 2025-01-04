@@ -4,7 +4,6 @@ import styles from '../styles/Form.module.css';
 import Header from "../components/Header";
 
 export default function Registrar() {
-
   const [Nome, setNome] = useState('');
   const [Email, setEmail] = useState('');
   const [Idade, setIdade] = useState('');
@@ -44,52 +43,55 @@ export default function Registrar() {
 
   return (
     <main>
-      <Header className={styles.header} />
-      <form onSubmit={registrar} className={styles.form}>
-        <input
-          type="text"
-          value={Nome}
-          placeholder="Nome"
-          onChange={(event) => setNome(event.target.value)}
-        />
-        <input
-          type="text"
-          value={Email}
-          placeholder="Email"
-          onChange={(event) => setEmail(event.target.value)}
-        />
-        <input
-          type="text"
-          value={Idade}
-          placeholder="Idade"
-          onChange={(event) => setIdade(event.target.value)}
-        />
-        <input
-          type="text"
-          value={Cpf}
-          placeholder="CPF"
-          onChange={(event) => setCpf(event.target.value)}
-        />
-        <input
-          type="text"
-          value={Endereco}
-          placeholder="Endereço"
-          onChange={(event) => setEndereco(event.target.value)}
-        />
-        <input
-          type="text"
-          value={Pais}
-          placeholder="País"
-          onChange={(event) => setPais(event.target.value)}
-        />
-        <input
-          type="text"
-          value={Idioma}
-          placeholder="Idioma"
-          onChange={(event) => setIdioma(event.target.value)}
-        />
-        <button type="submit">Registrar</button>
-      </form>
+      <Header />
+
+      <div className={styles["form-container"]}>
+        <form onSubmit={registrar} className={styles.form}>
+          <input
+            type="text"
+            value={Nome}
+            placeholder="Nome"
+            onChange={(event) => setNome(event.target.value)}
+          />
+          <input
+            type="text"
+            value={Email}
+            placeholder="Email"
+            onChange={(event) => setEmail(event.target.value)}
+          />
+          <input
+            type="text"
+            value={Idade}
+            placeholder="Idade"
+            onChange={(event) => setIdade(event.target.value)}
+          />
+          <input
+            type="text"
+            value={Cpf}
+            placeholder="CPF"
+            onChange={(event) => setCpf(event.target.value)}
+          />
+          <input
+            type="text"
+            value={Endereco}
+            placeholder="Endereço"
+            onChange={(event) => setEndereco(event.target.value)}
+          />
+          <input
+            type="text"
+            value={Pais}
+            placeholder="País"
+            onChange={(event) => setPais(event.target.value)}
+          />
+          <input
+            type="text"
+            value={Idioma}
+            placeholder="Idioma"
+            onChange={(event) => setIdioma(event.target.value)}
+          />
+          <button type="submit">Registrar</button>
+        </form>
+      </div>
     </main>
   );
 }
