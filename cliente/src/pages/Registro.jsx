@@ -2,8 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from '../styles/Form.module.css';  
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function Registrar() {
+
   const [Nome, setNome] = useState('');
   const [Email, setEmail] = useState('');
   const [Idade, setIdade] = useState('');
@@ -12,7 +14,7 @@ export default function Registrar() {
   const [Pais, setPais] = useState('');
   const [Idioma, setIdioma] = useState('');
 
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
   const registrar = async (event) => {
     event.preventDefault();
@@ -31,7 +33,7 @@ export default function Registrar() {
         })
       });
       if (resposta.ok) {
-        navigation('/');
+        navigate('/Home');  
       } else {
         const errorData = await resposta.json();
         alert('Ocorreu um erro na aplicação: ' + errorData.message);
@@ -54,13 +56,13 @@ export default function Registrar() {
             onChange={(event) => setNome(event.target.value)}
           />
           <input
-            type="text"
+            type="email"
             value={Email}
             placeholder="Email"
             onChange={(event) => setEmail(event.target.value)}
           />
           <input
-            type="text"
+            type="number"
             value={Idade}
             placeholder="Idade"
             onChange={(event) => setIdade(event.target.value)}
@@ -91,6 +93,7 @@ export default function Registrar() {
           />
           <button type="submit">Registrar</button>
         </form>
+        <Footer className={styles.footer} />
       </div>
     </main>
   );

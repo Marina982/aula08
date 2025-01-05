@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import styles from '../styles/Form.module.css';
+import Footer from "../components/Footer";
 
 export default function Formulario() {
   const { id } = useParams();
@@ -114,8 +115,9 @@ export default function Formulario() {
             placeholder="Idioma"
             onChange={handleChange}
           />
-          <button type="submit">{isEdit ? 'Atualizar Dados' : 'Registrar'}</button>
+          <button type="submit"></button>
         </form>
+        <Footer className={styles.footer} />
       </main>
     </div>
   );

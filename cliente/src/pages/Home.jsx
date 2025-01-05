@@ -4,7 +4,10 @@ import 'jspdf-autotable';
 import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 import styles from '../styles/Header.module.css';
+import Loading from '../components/Loading';
+
 
 export default function Home() {
 
@@ -57,13 +60,44 @@ export default function Home() {
     doc.save("Arquivo-tabela-if.pdf");
   };
 
+
+
+    const reverseOrder = () => {
+      const listaReversa = [...jogos].reverse((a,b) => a.nome.localeCompare(b.nome))
+      setJogos(listaReversa)
+    }
+
+
+    const orderAZ = () => {
+      const AZ = [...jogos].reverse((a,b) => b.nome.localeCompare(a.nome))
+      setJogos(AZ)
+    }
+
+
+
+      if(jogos.length == 0){
+        return <Loading/>
+      }
+
+
   return (
     <div>
       <Header className={styles.header} />
       <Button variant="contained" onClick={() => exportPDF()} style={{ margin: '10px' }}>Gerar PDF</Button>
-      <Link to="/registrar">
+      <Link to="/">
         <Button variant="contained" color="" style={{ margin: '10px' }}>Registrar</Button>
       </Link>
+
+    <Button variant="contained" onClick={() => orderAZ() }>
+      De A a Z
+    </Button>
+
+
+    <Button variant="contained" onClick={() => reverseOrder()} style={{margin: '10px'}}>
+      Inverter
+    </Button>
+    
+
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -98,6 +132,7 @@ export default function Home() {
           </TableBody>
         </Table>
       </TableContainer>
+      <Footer className={styles.footer} />
     </div>
   );
 }
