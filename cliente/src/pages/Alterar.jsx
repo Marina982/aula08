@@ -4,7 +4,12 @@ import Header from "../components/Header";
 import styles from '../styles/Form.module.css';
 import Footer from "../components/Footer";
 
+import { useNavigate } from "react-router-dom";
+
 export default function Formulario() {
+
+  const navigate = useNavigate();
+
   const { id } = useParams();
   const isEdit = !!id;
   const [dados, setDados] = useState({
@@ -43,15 +48,14 @@ export default function Formulario() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dados)
       });
-      if (!resposta.ok) {
-        alert("Erro ao enviar dados");
+      if (resposta.ok) {
+        navigate('/Home');  
       } else {
-        const attDados = await resposta.json();
-        setDados(attDados);
-        alert("Dados enviados com sucesso");
+        const errorData = await resposta.json();
+        alert('Ocorreu um erro na aplicação: ' + errorData.message);
       }
     } catch (err) {
-      alert('Ocorreu um erro ao enviar os dados.');
+      alert('Ocorreu um erro de rede na aplicação');
     }
   };
 

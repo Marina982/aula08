@@ -3,109 +3,97 @@ import Header from "../components/Header";
 import styles from '../styles/Header.module.css';
 import { useState } from "react";
 import Footer from "../components/Footer";
-import {Button} from "@mui/material";
-
+import { Button } from "@mui/material";
 
 export default function Produtos() {
     const [listaProdutos, setProdutos] = useState([
         {
             id: 1,
-            item: "Tênis Adidas Breaknet",
-            imagem: "https://static.netshoes.com.br/produtos/tenis-adidas-breaknet-feminino/90/NQQ-4379-890/NQQ-4379-890_zoom1.jpg?ts=1711641809&ims=326x",
-            preco: 990,
-            marca: "Adidas",
-            descricao: ["Social,", "Branco"]
+            item: "The Last of Us Part I",
+            imagem: "https://image.api.playstation.com/vulcan/img/rnd/202011/1020/FKgazVvG7BcWouCr39mIiXkW.png?w=230&thumb=false",
+            preco: 99.99,
+            marca: "Naughty Dog",
+            descricao: ["Ação,", "Aventura"]
         },
         {
             id: 2,
-            item: "Tênis ASICS GEL-Kimera",
-            imagem: "https://static.netshoes.com.br/produtos/tenis-mizuno-wave-titan-2-masculino/06/2FU-6367-006/2FU-6367-006_zoom1.jpg?ts=1714414001&ims=326x",
-            preco: 100,
-            marca: "Asics",
-            descricao: ["Social,", "Branco"]
+            item: "God of War",
+            imagem: "https://image.api.playstation.com/vulcan/ap/rnd/202207/1210/4xJ8XB3bi888QTLZYdl7Oi0s.png?w=230&thumb=false",
+            preco: 299.99,
+            marca: "Santa Monica Studio",
+            descricao: ["Ação,", "Aventura"]
         },
         {
             id: 3,
-            item: "Tênis Adidas Breaknet",
-            imagem: "https://static.netshoes.com.br/produtos/tenis-adidas-breaknet-masculino/90/NQQ-4378-890/NQQ-4378-890_zoom1.jpg?ts=1705939673&ims=326x",
-            preco: 545,
-            marca: "Adidas",
-            descricao: ["Social,", "Branco"]
+            item: "Ghost of Tsushima",
+            imagem: "https://image.api.playstation.com/vulcan/ap/rnd/202106/2322/c16gs6a7lbAYzPf7ZTikbH1c.png?w=230&thumb=false",
+            preco: 299.99,
+            marca: "Sucker Punch Productions",
+            descricao: ["Ação,", "Aventura"]
         },
         {
             id: 4,
-            item: "Adidas Esportiva",
-            imagem: "https://static.netshoes.com.br/produtos/tenis-adidas-response-runner/26/FB9-3696-026/FB9-3696-026_zoom1.jpg?ts=1721239502&ims=326x",
-            preco: 454,
-            marca: "Adidas",
-            descricao: ["Social,", "Branco"]
+            item: "Spider-Man: Miles Morales",
+            imagem: "https://image.api.playstation.com/vulcan/ap/rnd/202008/1020/T45iRN1bhiWcJUzST6UFGBvO.png?w=230&thumb=false",
+            preco: 343.99,
+            marca: "Insomniac Games",
+            descricao: ["Ação,", "Aventura"]
         },
         {
             id: 5,
-            item: "Puma RBD",
-            imagem: "https://static.netshoes.com.br/produtos/tenis-puma-rbd-game-bdp/24/2I3-5479-024/2I3-5479-024_zoom1.jpg?ts=1695699428&ims=326x",
-            preco: 222,
-            marca: "PUMA",
-            descricao: ["Social,", "Branco"]
+            item: "Horizon Zero Dawn",
+            imagem: "https://image.api.playstation.com/vulcan/ap/rnd/202409/2716/16b33fa9a5c7285ba86a035b4a1c5f8eb430b407eae35ffd.png?w=230&thumb=false",
+            preco: 149.99,
+            marca: "Guerrilla Games",
+            descricao: ["RPG,", "Aventura"]
         },
         {
             id: 6,
-            item: "Tênis Everlast Racer",
-            imagem: "https://static.netshoes.com.br/produtos/tenis-everlast-racer-unissex/58/AXB-7183-158/AXB-7183-158_zoom2.jpg?ts=1700223666&ims=326x",
-            preco: 100,
-            marca: "EverLast",
-            descricao: ["Social,", "Branco"]
+            item: "Uncharted 4: A Thief's End",
+            imagem: "https://image.api.playstation.com/vulcan/img/rnd/202011/1018/SGqMZHd7WWmN4XIcLfYMxJsc.png?w=230&thumb=false",
+            preco: 200.99,
+            marca: "Naughty Dog",
+            descricao: ["Ação,", "Aventura"]
         }
     ]);
 
-
     const reverseOrder = () => {
-        const listaReversa = [...listaProdutos].reverse((a,b) => a.nome.localeCompare(b.nome))
-        setProdutos(listaReversa)
-      }
-  
-  
-      const orderAZ = () => {
-        const AZ = [...listaProdutos].reverse((a,b) => b.nome.localeCompare(a.nome))
-        setProdutos(AZ)
-      }
+        const listaReversa = [...listaProdutos].reverse((a, b) => a.item.localeCompare(b.item));
+        setProdutos(listaReversa);
+    };
 
+    const orderAZ = () => {
+        const AZ = [...listaProdutos].sort((a, b) => a.item.localeCompare(b.item));
+        setProdutos(AZ);
+    };
 
-      const crescente = () => {
-        const menorMaior = [...listaProdutos].sort((a,b) => a.preco - b.preco)
-        setProdutos(menorMaior)
-      }
-      
-      const decrescente = () => {
-        const maiorMenor = [...listaProdutos].sort((a,b) => b.preco - a.preco)
-        setProdutos(maiorMenor)
-      }
+    const crescente = () => {
+        const menorMaior = [...listaProdutos].sort((a, b) => a.preco - b.preco);
+        setProdutos(menorMaior);
+    };
+
+    const decrescente = () => {
+        const maiorMenor = [...listaProdutos].sort((a, b) => b.preco - a.preco);
+        setProdutos(maiorMenor);
+    };
 
     return (
-            <div>
-                <Header className={styles.header} />
-
-
-                <Button variant="contained" onClick={() => orderAZ() }>
+        <div>
+            <Header className={styles.header} />
+            <Button variant="contained" style={{ color: "black", backgroundColor: "white" }} onClick={() => orderAZ()}>
                 AZ
-                </Button>
-
-
-                 <Button variant="contained" onClick={() => reverseOrder()} style={{margin: '10px'}}>
-                Reverser
-                 </Button>
-
-                 <Button variant="contained" onClick={() => crescente()} style={{margin: '10px'}}>
+            </Button>
+            <Button variant="contained" onClick={() => reverseOrder()} style={{ margin: '10px', color: "black", backgroundColor: "white" }}>
+                Reverter
+            </Button>
+            <Button variant="contained" onClick={() => crescente()} style={{ margin: '10px', color: "black", backgroundColor: "white" }}>
                 Menor para o Maior
-                 </Button>
-
-                 <Button variant="contained" onClick={() => decrescente()} style={{margin: '10px'}}>
+            </Button>
+            <Button variant="contained" onClick={() => decrescente()} style={{ margin: '10px', color: "black", backgroundColor: "white" }}>
                 Maior para o Menor
-                 </Button>
-
-                <ListarProdutos listaProdutos={listaProdutos} />
-                <Footer className={styles.footer} />
-            </div>
-    
+            </Button>
+            <ListarProdutos listaProdutos={listaProdutos} />
+            <Footer className={styles.footer} />
+        </div>
     );
 }

@@ -60,78 +60,72 @@ export default function Home() {
     doc.save("Arquivo-tabela-if.pdf");
   };
 
+  const reverseOrder = () => {
+    const listaReversa = [...jogos].reverse((a,b) => a.nome.localeCompare(b.nome))
+    setJogos(listaReversa)
+  }
 
+  const orderAZ = () => {
+    const AZ = [...jogos].reverse((a,b) => b.nome.localeCompare(a.nome))
+    setJogos(AZ)
+  }
 
-    const reverseOrder = () => {
-      const listaReversa = [...jogos].reverse((a,b) => a.nome.localeCompare(b.nome))
-      setJogos(listaReversa)
-    }
-
-
-    const orderAZ = () => {
-      const AZ = [...jogos].reverse((a,b) => b.nome.localeCompare(a.nome))
-      setJogos(AZ)
-    }
-
-
-
-      if(jogos.length == 0){
-        return <Loading/>
-      }
-
+  if(jogos.length == 0){
+    return <Loading/>
+  }
 
   return (
     <div>
       <Header className={styles.header} />
-      <Button variant="contained" onClick={() => exportPDF()} style={{ margin: '10px' }}>Gerar PDF</Button>
+      <Button variant="contained" onClick={() => exportPDF()} style={{ margin: '10px', color: "black", backgroundColor: "white" }}>Gerar PDF</Button>
       <Link to="/">
-        <Button variant="contained" color="" style={{ margin: '10px' }}>Registrar</Button>
+        <Button variant="contained"  style={{ margin: '10px', color: "black", backgroundColor: "white" }}>Registrar</Button>
+      </Link>
+      <Link to="/produtos">
+        <Button variant="contained" style={{ margin: '10px', color: "black", backgroundColor: "white" }}>Produtos</Button>
       </Link>
 
-    <Button variant="contained" onClick={() => orderAZ() }>
-      De A a Z
-    </Button>
+      <Button variant="contained" style={{backgroundColor: "white", color: "black"}}  onClick={() => orderAZ() }>
+        De A a Z
+      </Button>
 
+      <Button variant="contained" onClick={() => reverseOrder()} style={{margin: '10px', color: "black", backgroundColor: "white"}}>
+        Inverter
+      </Button>
 
-    <Button variant="contained" onClick={() => reverseOrder()} style={{margin: '10px'}}>
-      Inverter
-    </Button>
-    
-
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Nome</TableCell>
-              <TableCell>E-mail</TableCell>
-              <TableCell>Idade</TableCell>
-              <TableCell>CPF</TableCell>
-              <TableCell>Endereço</TableCell>
-              <TableCell>País</TableCell>
-              <TableCell>Idioma</TableCell>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Nome</TableCell>
+            <TableCell>E-mail</TableCell>
+            <TableCell>Idade</TableCell>
+            <TableCell>CPF</TableCell>
+            <TableCell>Endereço</TableCell>
+            <TableCell>País</TableCell>
+            <TableCell>Idioma</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {jogos.map((jogo) => (
+            <TableRow key={jogo.id}>
+              <TableCell>{jogo.nome}</TableCell>
+              <TableCell>{jogo.email}</TableCell>
+              <TableCell>{jogo.idade}</TableCell>
+              <TableCell>{jogo.cpf}</TableCell>
+              <TableCell>{jogo.endereco}</TableCell>
+              <TableCell>{jogo.pais}</TableCell>
+              <TableCell>{jogo.idioma}</TableCell>
+              <TableCell>
+                <Button variant="contained" style={{color: "black", backgroundColor: "white" }} onClick={() => deletar(jogo.id)}>Remover</Button>
+                <Link to={'/Alterar/' + jogo.id}>
+                  <Button variant="contained" style={{color: "black", backgroundColor: "white" }}>Alterar</Button>
+                </Link>
+              </TableCell>
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {jogos.map((jogo) => (
-              <TableRow key={jogo.id}>
-                <TableCell>{jogo.nome}</TableCell>
-                <TableCell>{jogo.email}</TableCell>
-                <TableCell>{jogo.idade}</TableCell>
-                <TableCell>{jogo.cpf}</TableCell>
-                <TableCell>{jogo.endereco}</TableCell>
-                <TableCell>{jogo.pais}</TableCell>
-                <TableCell>{jogo.idioma}</TableCell>
-                <TableCell>
-                  <Button variant="contained" color="primary" onClick={() => deletar(jogo.id)}>Remover</Button>
-                  <Link to={'/Alterar/' + jogo.id}>
-                    <Button variant="contained">Alterar</Button>
-                  </Link>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+          ))}
+        </TableBody>
+      </Table>
+
       <Footer className={styles.footer} />
     </div>
   );

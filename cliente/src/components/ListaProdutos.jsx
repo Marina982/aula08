@@ -31,6 +31,7 @@ export default function ListarProdutos({ listaProdutos }) {
                                 <Button 
                                     variant="contained" 
                                     color="primary" 
+                                    style={{ backgroundColor: "white", color: "black"}}
                                     onClick={() => adicionarProdutoPedido(produto)}>
                                     Comprar
                                 </Button>
@@ -39,6 +40,10 @@ export default function ListarProdutos({ listaProdutos }) {
                     </Grid>
                 ))
             }
+            {/* Espaço extra no final da lista */}
+            <Grid item xs={12}>
+                <div style={{ height: '150px' }}></div>
+            </Grid>
         </Grid>
     );
 }
