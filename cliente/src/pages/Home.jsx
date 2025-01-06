@@ -81,10 +81,6 @@ export default function Home() {
       <Link to="/">
         <Button variant="contained"  style={{ margin: '10px', color: "black", backgroundColor: "white" }}>Registrar</Button>
       </Link>
-      <Link to="/produtos">
-        <Button variant="contained" style={{ margin: '10px', color: "black", backgroundColor: "white" }}>Produtos</Button>
-      </Link>
-
       <Button variant="contained" style={{backgroundColor: "white", color: "black"}}  onClick={() => orderAZ() }>
         De A a Z
       </Button>

@@ -119,7 +119,7 @@ export default function Formulario() {
             placeholder="Idioma"
             onChange={handleChange}
           />
-          <button type="submit"></button>
+          <button type="submit">Alterar</button>
         </form>
         <Footer className={styles.footer} />
       </main>

@@ -1,7 +1,7 @@
 /* Header.module.css */
 .header {
     background-color: #f4f4f4;
-    padding: 10px;
+    padding: 3px;
     color: white;
     display: flex;
     justify-content: space-between;

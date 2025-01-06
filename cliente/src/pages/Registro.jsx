@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from '../styles/Form.module.css';  
+import styles from '../styles/RegistrosForm.module.css';  
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 export default function Registrar() {
-
   const [Nome, setNome] = useState('');
   const [Email, setEmail] = useState('');
   const [Idade, setIdade] = useState('');
