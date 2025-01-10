@@ -57,6 +57,8 @@ export default function Produtos() {
         }
     ]);
 
+    
+
     const reverseOrder = () => {
         const listaReversa = [...listaProdutos].reverse((a, b) => a.item.localeCompare(b.item));
         setProdutos(listaReversa);
@@ -77,6 +79,14 @@ export default function Produtos() {
         setProdutos(maiorMenor);
     };
 
+
+    const consultar = (Pesquisar) => {
+        const consulta = [...listaProdutos].filter(produto => 
+            produto.item.toLowerCase().includes(Pesquisar.toLowerCase())
+        )
+        setProdutos(consulta)
+    }
+
     return (
         <div>
             <Header className={styles.header} />
@@ -92,6 +102,11 @@ export default function Produtos() {
             <Button variant="contained" onClick={() => decrescente()} style={{ margin: '10px', color: "black", backgroundColor: "white" }}>
                 Maior para o Menor
             </Button>
+            <input
+                type="text"
+                placeholder="Search"
+                onChange={(event) => consultar(event.target.value)}
+            />
             <ListarProdutos listaProdutos={listaProdutos} />
             <Footer className={styles.footer} />
         </div>
