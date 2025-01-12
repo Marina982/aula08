@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import styles from '../styles/Header.module.css';
 import { useState } from "react";
 import Footer from "../components/Footer";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material"; // Importe o TextField
 
 export default function Produtos() {
     const [listaProdutos, setProdutos] = useState([
@@ -57,8 +57,6 @@ export default function Produtos() {
         }
     ]);
 
-    
-
     const reverseOrder = () => {
         const listaReversa = [...listaProdutos].reverse((a, b) => a.item.localeCompare(b.item));
         setProdutos(listaReversa);
@@ -79,13 +77,12 @@ export default function Produtos() {
         setProdutos(maiorMenor);
     };
 
-
     const consultar = (Pesquisar) => {
-        const consulta = [...listaProdutos].filter(produto => 
+        const consulta = [...listaProdutos].filter(produto =>
             produto.item.toLowerCase().includes(Pesquisar.toLowerCase())
-        )
-        setProdutos(consulta)
-    }
+        );
+        setProdutos(consulta);
+    };
 
     return (
         <div>
@@ -102,10 +99,10 @@ export default function Produtos() {
             <Button variant="contained" onClick={() => decrescente()} style={{ margin: '10px', color: "black", backgroundColor: "white" }}>
                 Maior para o Menor
             </Button>
-            <input
-                type="text"
-                placeholder="Search"
+            <TextField
+                label="Pesquisar"
                 onChange={(event) => consultar(event.target.value)}
+                style={{ margin: '10px 0', width: '250px' }}
             />
             <ListarProdutos listaProdutos={listaProdutos} />
             <Footer className={styles.footer} />
