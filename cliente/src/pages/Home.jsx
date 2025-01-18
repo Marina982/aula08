@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
+import { Button, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
