@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import styles from '../styles/Header.module.css';
 import { useState } from "react";
 import Footer from "../components/Footer";
-import { Button, TextField } from "@mui/material"; // Importe o TextField
+import { Button, TextField } from "@mui/material"; 
 
 export default function Produtos() {
     const [listaProdutos, setProdutos] = useState([

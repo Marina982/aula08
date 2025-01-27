@@ -40,7 +40,6 @@ export default function ListarProdutos({ listaProdutos }) {
                     </Grid>
                 ))
             }
-            {/* Espaço extra no final da lista */}
             <Grid item xs={12}>
                 <div style={{ height: '150px' }}></div>
             </Grid>
