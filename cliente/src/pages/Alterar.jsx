@@ -38,7 +38,7 @@ export default function Formulario() {
     }
   }, [id, isEdit]);
 
-  const handleSubmit = async (event) => {
+  const submit = async (event) => {
     event.preventDefault();
     try {
       const url = isEdit ? `http://localhost:3001/jogos/${id}` : 'http://localhost:3001/jogos';
@@ -59,7 +59,7 @@ export default function Formulario() {
     }
   };
 
-  const handleChange = (event) => {
+  const attDados = (event) => {
     const { name, value } = event.target;
     setDados({ ...dados, [name]: value });
   };
@@ -69,55 +69,55 @@ export default function Formulario() {
       <Header className={styles.header} />
       
       <main className={styles.main}>
-        <form onSubmit={handleSubmit} className={styles.form}>
+        <form onSubmit={submit} className={styles.form}>
           <input
             type="text"
             name="nome"
             value={dados.nome}
             placeholder="Nome"
-            onChange={handleChange}
+            onChange={attDados}
           />
           <input
             type="email"
             name="email"
             value={dados.email}
             placeholder="Email"
-            onChange={handleChange}
+            onChange={attDados}
           />
           <input
             type="text"
             name="idade"
             value={dados.idade}
             placeholder="Idade"
-            onChange={handleChange}
+            onChange={attDados}
           />
           <input
             type="text"
             name="cpf"
             value={dados.cpf}
             placeholder="CPF"
-            onChange={handleChange}
+            onChange={attDados}
           />
           <input
             type="text"
             name="endereco"
             value={dados.endereco}
             placeholder="Endereço"
-            onChange={handleChange}
+            onChange={attDados}
           />
           <input
             type="text"
             name="pais"
             value={dados.pais}
             placeholder="País"
-            onChange={handleChange}
+            onChange={attDados}
           />
           <input
             type="text"
             name="idioma"
             value={dados.idioma}
             placeholder="Idioma"
-            onChange={handleChange}
+            onChange={attDados}
           />
           <button type="submit">Alterar</button>
         </form>
